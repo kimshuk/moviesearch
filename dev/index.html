@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>movie search app</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controller/MainController.js"></script>
+    <script src="js/controller/ApiController.js"></script>
+</head>
+<body>
+   <h1>Single Page Movie Search App</h1>
+   <p>Please enter movie title</p>
+    <form name="searcher" ng-submit="search(movieName)">
+        <input type="search" placeholder="Movie Title" ng-model="movieName" required />
+        <input type="submit" value="Submit" />
+    </form>
+    <div ng-include="viewer/movie.html"></div>
+</body>
+</html>
