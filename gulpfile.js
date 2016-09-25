@@ -13,25 +13,26 @@ gulp.task('connect', function() {
     });
 });
 
-gulp.task('html', function() {
+gulp.task('html', ['build:html'], function() {
     gulp.src('./dev/*.html')
         .pipe(connect.reload());
 });
 
-gulp.task('script', function() {
-    gulp.src('./dev/js/*.js')
+gulp.task('script', ['build:script'], function() {
+    gulp.src('./dev/js/**/*.js')
         .pipe(connect.reload());
-})
+});
 
-gulp.task('style', function() {
-   return gulp.src('./dev/sass/*.scss')
-    .pipe(autoprefixer())
-    .pipe(cleanCSS({
-       compatibility: 'ie8'
-    }))
-    .pipe(gulp.dest('./dist/css'))
-    .pipe(gulp.dest('./dev/css'))
-    .pipe(connect.reload());
+gulp.task('style', ['build:style'], function () {
+    return gulp.src('./dev/sass/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer())
+        .pipe(cleanCSS({
+            compatibility: 'ie8'
+        }))
+        .pipe(gulp.dest('./dev/css'))
+        .pipe(gulp.dest('./dist/css'))
+        .pipe(connect.reload());
 });
 
 gulp.task('build:html', function() {
@@ -39,11 +40,11 @@ gulp.task('build:html', function() {
 });
 
 gulp.task('build:style', function() {
-    gulp.src('./dev/css/*.css').pipe(gulp.dest('dist/css'));
+    gulp.src('./dev/css/**/*.css').pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('build:script', function() {
-    gulp.src('./dev/js/*.js').pipe(gulp.dest('dist/js'));
+    gulp.src('./dev/js/**/*.js').pipe(gulp.dest('dist/js'));
 })
 
 gulp.task('watch:html', function() {
@@ -51,11 +52,11 @@ gulp.task('watch:html', function() {
 });
 
 gulp.task('watch:script', function() {
-    gulp.watch(['./dev/js/*.js'], ['script']);
+    gulp.watch(['./dev/js/**/*.js'], ['script']);
 });
 
 gulp.task('watch:style', function() {
-    gulp.watch(['./dev/sass/*.scss'], ['style']);
+    gulp.watch('./dev/sass/**/*.scss', ['style']);
 });
 
 gulp.task('build', ['build:html', 'build:script', 'build:style']);

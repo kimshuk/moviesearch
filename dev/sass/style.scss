@@ -1,0 +1,55 @@
+@import 'helpers/variables';
+@import 'helpers/mixins';
+
+
+// maring on top and bottom of img
+// overlay shows 100% when hovering over the img
+.movie_poster {
+    margin-top: 5%;
+    margin-bottom: 1%;
+    &:hover {
+        & .overlay {
+            opacity: 1;
+        }
+    }
+}
+
+// width and height for img and overlay
+.movie_poster img,
+.overlay {
+    width: 150px;
+    height: 225px;
+}
+
+// overlay color and opacity set as 0
+.overlay {
+    background: rgba(0, 0, 0, .75);
+    opacity: 0;
+    transition: opacity .25s ease;
+    position: absolute;
+    top: 10px;
+}
+
+// content position on overlay
+.content {
+    float: left;
+    color: white;
+    padding-top: 10%;
+    padding-left: 3%;
+}
+
+// media query for phone display
+@include respondTo(sm) {
+    .movie_poster img,
+    .overlay {
+        width: 600px;
+        height: 900px;
+    }
+    .movie_title {
+        font-size: 300%;
+    }
+    .search_form {
+        height: 200%;
+    }
+    
+}

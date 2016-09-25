@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <title>movie search app</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
     <script src="js/app.js"></script>
-    <script src="js/controllers/MainController.js"></script>
-    <script src="js/controllers/ApiController.js"></script>
+    <script src="js/MainController.js"></script>
     <script src="js/services/api.js"></script>
 
 </head>
@@ -19,17 +19,32 @@
     <div class="container-fluid">
         <h1>Single Page Movie Search App</h1>
         <p>Please enter movie title</p>
-        <div class="container">
-            <form name="searchMovie" ng-submit="search(movieName)">
-                <input type="search" placeholder="Movie Title" ng-model="movieName" required />
-                <input type="submit" value="Search" />
+        <div class="search_form">
+            <form class="input-group col-md-6 col-xs-12" name="searchMovie" ng-submit="search(movieName)">
+                <input type="search" placeholder="Movie Title" ng-model="movieName" class="form-control" required />
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary glyphicon glyphicon-search" type="submit" value="Search"></button>
+                </span>
             </form>
         </div>
 
-        <div ng-show="searched" class="container">
-            <img src="{{ moviePoster }}">
-            <app-info>{{ movieTitle }}</app-info>
+        <div ng-show="searched" class="container-fluid">
+    <div ng-repeat="movieList in movieInfo">
+    <div class="col-md-2 col-sm-12">
+        <div class="movie_poster">
+            <img ng-src="http://image.tmdb.org/t/p/w154{{ movieList.poster_path }}">
+            <div class="overlay">
+                <span class="content">
+                    Release Date:  {{ movieList.release_date | date }}</span>
+                <span class="content">
+                    Vote Avg: {{ movieList.vote_average }}    
+                    </span>
+            </div>
         </div>
+        <app-info class="movie_title">{{ movieList.title }}</app-info>
+    </div>
+</div>
+</div>
     </div>
 </body>
 
