@@ -10,6 +10,10 @@ app.factory("api", function ($http) {
                 query: movieName
             }
         }).then(function (response) {   // when call was successful, brings json into "response"
+            var res = response.data.results;
+            res.forEach(function (movie) {
+                console.log(movie.poster_path); 
+            });
             return response.data;   //return promise
         });
     };

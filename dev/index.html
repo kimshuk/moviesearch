@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>movie search app</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -32,26 +33,28 @@
 
 <!-- search result show -->
         <div ng-show="searched" class="container-fluid">
-<!-- ng-repeat to display scope -->
-            <div ng-repeat="movieList in movieInfo">
-                <div class="col-md-2 col-sm-12">
-                    <div class="movie_poster">
-<!-- display poster_path -->
-                        <img ng-src="http://image.tmdb.org/t/p/w154{{ movieList.poster_path }}">
-<!-- overlay for hover -->
-                        <div class="overlay">
-<!-- content on overlay -->
-                            <span class="content">
+    <div class="row">
+        <!-- ng-repeat to display scope -->
+        <div ng-repeat="movieList in movieInfo">
+            <div class="col-sm-2">
+                <div class="movie_poster">
+                    <!-- display poster_path -->
+                    <img ng-src="http://image.tmdb.org/t/p/w154{{ movieList.poster_path }}">
+                    <!-- overlay for hover -->
+                    <div class="overlay">
+                        <!-- content on overlay -->
+                        <span class="content">
                     Release Date:  {{ movieList.release_date | date }}</span>
-                            <span class="content">
+                        <span class="content">
                     Vote Avg: {{ movieList.vote_average }}    
                     </span>
-                        </div>
                     </div>
-<!-- display title -->
-                    <app-info class="movie_title">{{ movieList.title }}</app-info>
                 </div>
-            </div>
+                <!-- display title -->
+                <app-info class="movie_title">{{ movieList.title }}</app-info>
+        </div>
+    </div>
+</div>
         </div>
     </div>
 </body>

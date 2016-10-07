@@ -42,8 +42,9 @@
 @include respondTo(sm) {
     .movie_poster img,
     .overlay {
-        width: 600px;
-        height: 900px;
+        width: 200px;
+        height: 300px;
+        text-align: center;
     }
     .movie_title {
         font-size: 300%;
